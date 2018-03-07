@@ -4,20 +4,15 @@
 #include <vector>
 #include <iostream>
 
-#include "csv.h"
+#include "contact_list.h"
 
 int main()
 {
     std::cout << "Hello\n";
 
-    csv my_csv = csv();
-    my_csv.read_file();
+    contact_list my_list = contact_list();
+    my_list.read_csv_to_list();
 
-    std::string usr_input;
-    std::cout << usr_input;    while (usr_input != "q")
-    {
-        std::cout << "enter something: ";
-        std::getline(std::cin, usr_input);
-    }
+    my_list.run();
     return 0;
 }

@@ -1,6 +1,6 @@
 CFLAGS = -O -g -Wall
 CC = g++ 
-SRC = main.cpp csv.cpp
+SRC = main.cpp contact_list.cpp sl_list.cpp node.h
 MAIN = main
 
 all: $(MAIN)
