@@ -13,26 +13,25 @@ void List::Print() {
 
     // No nodes
     if ( tmp == NULL ) {
-    cout << "EMPTY" << endl;
-    return;
+        cout << "EMPTY" << endl;
+        return;
     }
+    else
+    {
 
-    // One node in the list
-    if ( tmp->Next() == NULL ) {
-    cout << tmp->Data();
-    cout << " --> ";
-    cout << "NULL" << endl;
-    }
-    else {
-    // Parse and print the list
-    do {
-        cout << tmp->Data();
-        cout << " --> ";
-        tmp = tmp->Next();
-    }
-    while ( tmp != NULL );
-
-    cout << "NULL" << endl;
+        if (tmp->Next() != NULL)
+        {
+            while (tmp->Next() != NULL)
+            {
+                cout << tmp->Data() << endl;
+                tmp = tmp->Next();
+            }
+        }
+        else
+        // One node in the list
+        {
+            cout << tmp->Data() << endl;
+        }
     }
 }
 

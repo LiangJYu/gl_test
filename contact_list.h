@@ -8,6 +8,8 @@ class contact_list
 {
     List list;
 
+    void show_options();
+
     public:
         void read_csv_to_list();
         bool find_contact(string);
