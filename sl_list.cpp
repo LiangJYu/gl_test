@@ -67,6 +67,18 @@ void List::print() {
      }
  }
 
+/*
+* wrapper function to check if name in data using string::find
+*/
+bool has_name(Node* n, string name)
+{
+    std::size_t found = n->get_data().find(name);
+    if (found == string::npos)
+        return false;
+    else
+        return true;
+}
+
 /**
 * Find a node from the list and maybe delete it
 * Recycled loop code for find and delete
@@ -89,7 +101,8 @@ void List::find_maybe_delete(string name, bool del)
     else
     {
         // check if only 1 element has name
-        if (tmp->get_next() == NULL && tmp->get_data() == name)
+        //if (tmp->get_next() == NULL && tmp->get_data() == name)
+        if (tmp->get_next() == NULL && has_name(tmp, name))
         {
             cout << report << tmp->get_data() << endl;
             if (del)
@@ -103,13 +116,15 @@ void List::find_maybe_delete(string name, bool del)
         {
             Node *prev = head;
             // check for name match or end of list
-            while (tmp->get_data() != name && tmp->get_next() != NULL)
+            //while (tmp->get_data() != name && tmp->get_next() != NULL)
+            while (!has_name(tmp, name) && tmp->get_next() != NULL)
             {
                 prev = tmp;
                 tmp = tmp->get_next();
             }
             // check if name match is found
-            if (tmp->get_data() == name)
+            //if (tmp->get_data() == name)
+            if (has_name(tmp, name))
             {
                 cout << report << tmp->get_data() << endl;
                 if (del) {
