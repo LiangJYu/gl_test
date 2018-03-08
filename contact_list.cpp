@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sys/stat.h>
 
 #include "contact_list.h"
 
@@ -9,28 +10,32 @@ using std::cin;
 /*
 * read CSV from file to list
 */
-void contact_list::read_csv_to_list()
+bool contact_list::read_csv_to_list()
 {
     // open file 
     // TODO take in arg from interface 
-    // TODO check if file exists
-    std::ifstream ifs ("data.csv", std::ifstream::in);
-
-    // declare values for later
-    string value;
-    std::size_t found;
-    
-    // get header and discard
-    std::getline(ifs, value);
-    // get lines while they're there
-    while(ifs.good())
+    string fpath = "data.csv";
+    struct stat buffer;
+    if ( stat(fpath.c_str(), &buffer) == 0 )
     {
+        std::ifstream ifs(fpath.c_str(), std::ifstream::in);
+
+        // get header and discard
+        string value;
         std::getline(ifs, value);
-        found = value.find(',');
-        string name = value.substr(0, found);
-        list.append(name);
+        // get lines while they're there
+        while(ifs.good())
+        {
+            std::getline(ifs, value);
+            list.append(value);
+        }
+        cout << "csv loaded\n";
+        return true;
     }
-    cout << "csv loaded\n";
+    else
+    {
+        return false;
+    }
 }
 
 /*

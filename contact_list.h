@@ -11,7 +11,7 @@ class contact_list
     void show_options();
 
     public:
-        void read_csv_to_list();
+        bool read_csv_to_list();
         void run();
 };
 
