@@ -42,6 +42,7 @@ void contact_list::run()
         std::cin >> usr_input;
 
         string name;
+        bool del = false;
         switch (usr_input) {
             case 0:
                 cout << "quitting application\n";
@@ -52,12 +53,13 @@ void contact_list::run()
             case 2:
                 cout << "Enter name to find: ";
                 cin >> name;
-                //list.find_contact(name);
+                list.find_maybe_delete(name, del) ;
                 break;
             case 3:
                 cout << "Enter name to delete: ";
                 cin >> name;
-                list.Delete(name);
+                del = true;
+                list.find_maybe_delete(name, del);
                 break;
             default:
                 cout << usr_input << " invalid. Choose again.\n";

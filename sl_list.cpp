@@ -65,12 +65,14 @@ void List::Append(string data) {
 }
 
 /**
- * Delete a node from the list
+ * Find a node from the list and maybe delete it
  */
-void List::Delete(string name) 
+void List::find_maybe_delete(string name, bool del) 
 {
     // Temp pointer
     Node *tmp = head;
+
+    string report = del ? " deleted\n" : " found\n"; 
 
     // No nodes
     if ( tmp == NULL ) 
@@ -82,9 +84,12 @@ void List::Delete(string name)
         // check if only 1 element has name
         if (tmp->Next() == NULL && tmp->Data() == name)
         {
-            delete tmp;
-            head = NULL;
-            cout << name << " deleted\n";
+            if (del)
+            {
+                delete tmp;
+                head = NULL;
+            }
+            cout << name << report;
         }
         // loop thru and check other elements for name
         else
@@ -99,9 +104,11 @@ void List::Delete(string name)
             // check if name match is found
             if (tmp->Data() == name)
             {
-                prev->SetNext(tmp->Next());
-                delete tmp;
-                cout << name << " deleted\n";
+                if (del) {
+                    prev->SetNext(tmp->Next());
+                    delete tmp;
+                }
+                cout << name << report;
             }
         }
     }

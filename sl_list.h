@@ -12,7 +12,7 @@ class List {
         List() { head = NULL; };
         void Print();
         void Append(string data);
-        void Delete(string data);
+        void find_maybe_delete(string name, bool del) ;
 };
 
 #endif /* SL_LIST_H */
