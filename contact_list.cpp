@@ -56,35 +56,42 @@ void contact_list::show_options()
 */
 void contact_list::run()
 {
-    int usr_input = -1; 
-    // keep going until user says stop
-    while (usr_input != 0)
+    // run
+    if (read_csv_to_list())
     {
-        // show options and get input then go
-        this->show_options();
-        std::cin >> usr_input;
+        int usr_input = -1; 
+        // keep going until user says stop
+        while (usr_input != 0)
+        {
+            // show options and get input then go
+            this->show_options();
+            std::cin >> usr_input;
 
-        string name;
-        switch (usr_input) {
-            case 0:
-                cout << "quitting application\n";
-                break;
-            case 1:
-                list.print();
-                break;
-            case 2:
-                cout << "Enter name to find: ";
-                cin >> name;
-                list.find(name);
-                break;
-            case 3:
-                cout << "Enter name to delete: ";
-                cin >> name;
-                list.erase(name);
-                break;
-            default:
-                cout << usr_input << " invalid. Choose again.\n";
-                break;
+            string name;
+            switch (usr_input) {
+                case 0:
+                    cout << "quitting application\n"
+                            "writing data to disk as serial.out\n";
+                    break;
+                case 1:
+                    list.print();
+                    break;
+                case 2:
+                    cout << "Enter name to find: ";
+                    cin >> name;
+                    list.find(name);
+                    break;
+                case 3:
+                    cout << "Enter name to delete: ";
+                    cin >> name;
+                    list.erase(name);
+                    break;
+                default:
+                    cout << usr_input << " invalid. Choose again.\n";
+                    break;
+            }
         }
     }
+    else
+        cout << "data.csv not found\n";
 }
