@@ -6,15 +6,17 @@
 using std::string;
 
 // Node class
+// for ease, storing entire line i.e.: name,number
+// ideally this should be templated for ease
 class Node {
-    string data;
+    string data; 
     Node* next;
 
   public:
     Node() {};
-    void SetData(string aData) { data = aData; };
-    void SetNext(Node* aNext = NULL) { next = aNext; };
-    string Data() { return data; };
-    Node* Next() { return next; };
+    void set_data(string aData) { data = aData; };
+    void set_next(Node* aNext = NULL) { next = aNext; };
+    string get_data() { return data; };
+    Node* get_next() { return next; };
 };
 #endif /* NODE_H */

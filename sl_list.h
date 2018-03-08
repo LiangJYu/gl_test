@@ -10,8 +10,8 @@ class List {
         Node *head;
     public:
         List() { head = NULL; };
-        void Print();
-        void Append(string data);
+        void print();
+        void append(string data);
         void find_maybe_delete(string name, bool del) ;
 };
 
