@@ -22,18 +22,18 @@ void List::print_to_screen()
     }
     else
     {
-        if (tmp->get_next() != NULL)
+        if (tmp->next != NULL)
         {
-            while (tmp->get_next() != NULL)
+            while (tmp->next != NULL)
             {
-                cout << tmp->get_data() << endl;
-                tmp = tmp->get_next();
+                cout << tmp->data << endl;
+                tmp = tmp->next;
             }
         }
         else
         // One node in the list
         {
-            cout << tmp->get_data() << endl;
+            cout << tmp->data << endl;
         }
     }
 }
@@ -52,33 +52,33 @@ void List::print_to_file()
     {
         std::ofstream out("backup.txt");
         out << "backup\n";  // throwaway top line to match csv
-        if (tmp->get_next() != NULL)
+        if (tmp->next != NULL)
         {
-            while (tmp->get_next() != NULL)
+            while (tmp->next != NULL)
             {
-                out << tmp->get_data() << endl;
-                tmp = tmp->get_next();
+                out << tmp->data << endl;
+                tmp = tmp->next;
             }
         }
         else
         // One node in the list
         {
-            out << tmp->get_data();
+            out << tmp->data;
         }
         out.close();
     }
 }
 
 
- /**
- * Append a node to the linked list
- */
- void List::append(string data) {
+/**
+* Append a node to the linked list
+*/
+void List::append(string data) {
 
     // Create a new node
-    Node* new_node = new Node();
-    new_node->set_data(data);
-    new_node->set_next(NULL);
+    Node* new_node = new Node;
+    new_node->data = data;
+    new_node->next = NULL;
 
     // Create a temp pointer
     Node *tmp = head;
@@ -86,25 +86,25 @@ void List::print_to_file()
     if ( tmp != NULL ) {
         // Nodes already present in the list
         // Parse to end of list
-        while ( tmp->get_next() != NULL ) {
-            tmp = tmp->get_next();
+        while ( tmp->next != NULL ) {
+            tmp = tmp->next;
         }
 
         // Point the last node to the new node
-        tmp->set_next(new_node);
+        tmp->next = new_node;
     }
     else {
-    // First node in the list
-     head = new_node;
-     }
- }
+        // First node in the list
+        head = new_node;
+    }
+}
 
 /*
 * wrapper function to check if name in data using string::find
 */
 bool has_name(Node* n, string name)
 {
-    std::size_t found = n->get_data().find(name);
+    std::size_t found = n->data.find(name);
     if (found == string::npos)
         return false;
     else
@@ -135,11 +135,11 @@ bool List::find_maybe_delete(string name, bool del)
     else
     {
         // check if only 1 element has name
-        //if (tmp->get_next() == NULL && tmp->get_data() == name)
-        if (tmp->get_next() == NULL && has_name(tmp, name))
+        //if (tmp->next == NULL && tmp->data == name)
+        if (tmp->next == NULL && has_name(tmp, name))
         {
             found = true;
-            cout << report << tmp->get_data() << endl;
+            cout << report << tmp->data << endl;
             if (del)
             {
                 delete tmp;
@@ -151,20 +151,20 @@ bool List::find_maybe_delete(string name, bool del)
         {
             Node *prev = head;
             // check for name match or end of list
-            //while (tmp->get_data() != name && tmp->get_next() != NULL)
-            while (!has_name(tmp, name) && tmp->get_next() != NULL)
+            //while (tmp->data != name && tmp->next != NULL)
+            while (!has_name(tmp, name) && tmp->next != NULL)
             {
                 prev = tmp;
-                tmp = tmp->get_next();
+                tmp = tmp->next;
             }
             // check if name match is found
-            //if (tmp->get_data() == name)
+            //if (tmp->data == name)
             if (has_name(tmp, name))
             {
                 found = true;
-                cout << report << tmp->get_data() << endl;
+                cout << report << tmp->data << endl;
                 if (del) {
-                    prev->set_next(tmp->get_next());
+                    prev->set_next(tmp->next);
                     delete tmp;
                 }
             }
