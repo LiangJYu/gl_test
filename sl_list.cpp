@@ -67,33 +67,42 @@ void List::Append(string data) {
 /**
  * Delete a node from the list
  */
-void List::Delete(string data) {
-
-    // Create a temp pointer
+void List::Delete(string name) 
+{
+    // Temp pointer
     Node *tmp = head;
 
     // No nodes
-    if ( tmp == NULL )
-    return;
-
-    // Last node of the list
-    if ( tmp->Next() == NULL ) {
-    delete tmp;
-    head = NULL;
+    if ( tmp == NULL ) 
+    {
+        cout << "EMPTY" << endl;
     }
-    else {
-    // Parse thru the nodes
-    Node *prev = NULL;
-    do {
-        if ( tmp->Data() == data ) break;
-        prev = tmp;
-        tmp = tmp->Next();
-    } while ( tmp != NULL );
-
-    // Adjust the pointers
-    prev->SetNext(tmp->Next());
-
-    // Delete the current node
-    delete tmp;
+    else
+    {
+        // check if only 1 element has name
+        if (tmp->Next() == NULL && tmp->Data() == name)
+        {
+            delete tmp;
+            head = NULL;
+            cout << name << " deleted\n";
+        }
+        // loop thru and check other elements for name
+        else
+        {
+            Node *prev = head;
+            // check for name match or end of list
+            while (tmp->Data() != name && tmp->Next() != NULL)
+            {
+                prev = tmp;
+                tmp = tmp->Next();
+            }
+            // check if name match is found
+            if (tmp->Data() == name)
+            {
+                prev->SetNext(tmp->Next());
+                delete tmp;
+                cout << name << " deleted\n";
+            }
+        }
     }
 }
