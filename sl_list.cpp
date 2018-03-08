@@ -8,72 +8,9 @@ using std::endl;
 using std::string;
 
 /**
-* Print list; all of it
-*/
-void List::print_to_screen() 
-{
-    // Temp pointer
-    Node *tmp = head;
-
-    // No nodes
-    if ( tmp == NULL ) {
-        cout << "EMPTY" << endl;
-        return;
-    }
-    else
-    {
-        if (tmp->next != NULL)
-        {
-            while (tmp->next != NULL)
-            {
-                cout << tmp->data << endl;
-                tmp = tmp->next;
-            }
-        }
-        else
-        // One node in the list
-        {
-            cout << tmp->data << endl;
-        }
-    }
-}
-
-void List::print_to_file()
-{
-    // Temp pointer
-    Node *tmp = head;
-
-    // No nodes
-    if ( tmp == NULL ) {
-        cout << "EMPTY" << endl;
-        return;
-    }
-    else
-    {
-        std::ofstream out("backup.txt");
-        out << "backup\n";  // throwaway top line to match csv
-        if (tmp->next != NULL)
-        {
-            while (tmp->next != NULL)
-            {
-                out << tmp->data << endl;
-                tmp = tmp->next;
-            }
-        }
-        else
-        // One node in the list
-        {
-            out << tmp->data;
-        }
-        out.close();
-    }
-}
-
-
-/**
 * Append a node to the linked list
 */
-void List::append(string data) {
+void sl_list::append(string data) {
 
     // Create a new node
     Node* new_node = new Node;
@@ -118,7 +55,7 @@ bool has_name(Node* n, string name)
 *   string  - name  - who to find to delete or print
 *   bool    - del   - true: delete if name found, else print contact
 */
-bool List::find_maybe_delete(string name, bool del) 
+bool sl_list::find_maybe_delete(string name, bool del) 
 {
     bool found = false;
 
@@ -176,7 +113,7 @@ bool List::find_maybe_delete(string name, bool del)
 /*
 * wrapper around find_maybe_delete for finding something
 */
-bool List::find(string name)
+bool sl_list::find(string name)
 {
     bool del = false;
     return find_maybe_delete(name, del);
@@ -185,7 +122,7 @@ bool List::find(string name)
 /*
 * wrapper around find_maybe_delete for deleting something
 */
-bool List::erase(string name)
+bool sl_list::erase(string name)
 {
     bool del = true;
     return find_maybe_delete(name, del);

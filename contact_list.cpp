@@ -6,7 +6,73 @@
 #include "quick_sort.h"
 
 using std::cout;
+using std::endl;
 using std::cin;
+
+/**
+* Print list to screen
+*/
+void contact_list::print_to_screen() 
+{
+    // Temp pointer
+    Node *tmp = list.head;
+
+    // No nodes
+    if ( tmp == NULL ) {
+        cout << "EMPTY" << endl;
+        return;
+    }
+    else
+    {
+        if (tmp->next != NULL)
+        {
+            while (tmp->next != NULL)
+            {
+                cout << tmp->data << endl;
+                tmp = tmp->next;
+            }
+        }
+        else
+        // One node in the list
+        {
+            cout << tmp->data << endl;
+        }
+    }
+}
+
+/**
+* Print list to file
+*/
+void contact_list::print_to_file()
+{
+    // Temp pointer
+    Node *tmp = list.head;
+
+    // No nodes
+    if ( tmp == NULL ) {
+        cout << "EMPTY" << endl;
+        return;
+    }
+    else
+    {
+        std::ofstream out("backup.txt");
+        out << "backup\n";  // throwaway top line to match csv
+        if (tmp->next != NULL)
+        {
+            while (tmp->next != NULL)
+            {
+                out << tmp->data << endl;
+                tmp = tmp->next;
+            }
+        }
+        else
+        // One node in the list
+        {
+            out << tmp->data;
+        }
+        out.close();
+    }
+}
 
 /*
 * read CSV from file to list
@@ -73,27 +139,28 @@ void contact_list::run()
             std::cin >> usr_input;
 
             string name;
-            switch (usr_input) {
+            switch (usr_input) 
+            {
                 case 0:
-                    cout << "quitting application\n"
+                    cout << "\nquitting application\n"
                             "writing data to disk as backup.txt\n";
-                    list.print_to_file();
+                    print_to_file();
                     break;
                 case 1:
-                    list.print_to_screen();
+                    print_to_screen();
                     break;
                 case 2:
-                    cout << "Enter name to find: ";
+                    cout << "\nEnter name to find: ";
                     cin >> name;
                     list.find(name);
                     break;
                 case 3:
-                    cout << "Enter name to delete: ";
+                    cout << "\nEnter name to delete: ";
                     cin >> name;
                     list.erase(name);
                     break;
                 default:
-                    cout << usr_input << " invalid. Choose again.\n";
+                    cout << endl << usr_input << " invalid. Choose again.\n";
                     break;
             }
         }

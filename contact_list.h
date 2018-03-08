@@ -6,11 +6,13 @@
 
 class contact_list
 {
-    List list;
+    sl_list list;
 
     void show_options();
 
     public:
+        void print_to_screen();
+        void print_to_file();
         bool read_csv_to_list();
         void run();
 };
