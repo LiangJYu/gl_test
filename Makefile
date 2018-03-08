@@ -8,5 +8,8 @@ all: $(MAIN)
 $(MAIN): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(MAIN)
 
+run: $(MAIN)
+	./$(MAIN)
+
 clean: 
 	rm -rf core *.o $(MAIN)
