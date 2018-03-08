@@ -12,8 +12,6 @@ class contact_list
 
     public:
         void read_csv_to_list();
-        bool find_contact(string);
-        bool delete_contact(string);
         void run();
 };
 

@@ -4,6 +4,7 @@
 #include "contact_list.h"
 
 using std::cout;
+using std::cin;
 
 void contact_list::read_csv_to_list()
 {
@@ -32,18 +33,6 @@ void contact_list::show_options()
             "choose an option: ";
 }
 
-bool contact_list::find_contact(string name)
-{
-    list.Delete(name);
-    return true;
-}
-
-bool contact_list::delete_contact(string name)
-{
-    list.Delete(name);
-    return true;
-}
-
 void contact_list::run()
 {
     int usr_input = -1; 
@@ -52,12 +41,23 @@ void contact_list::run()
         this->show_options();
         std::cin >> usr_input;
 
+        string name;
         switch (usr_input) {
             case 0:
                 cout << "quitting application\n";
                 break;
             case 1:
                 list.Print();
+                break;
+            case 2:
+                cout << "Enter name to find: ";
+                cin >> name;
+                //list.find_contact(name);
+                break;
+            case 3:
+                cout << "Enter name to delete: ";
+                cin >> name;
+                list.Delete(name);
                 break;
             default:
                 cout << usr_input << " invalid. Choose again.\n";
