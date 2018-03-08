@@ -12,10 +12,12 @@ using std::cin;
 */
 bool contact_list::read_csv_to_list()
 {
-    // open file 
-    // TODO take in arg from interface 
-    string fpath = "data.csv";
+    // check if backup exists if no backup use original
     struct stat buffer;
+    string fpath = "backup.txt";
+    if ( stat(fpath.c_str(), &buffer) != 0 )
+        fpath = "data.csv";
+    // open file 
     if ( stat(fpath.c_str(), &buffer) == 0 )
     {
         std::ifstream ifs(fpath.c_str(), std::ifstream::in);
@@ -29,7 +31,7 @@ bool contact_list::read_csv_to_list()
             std::getline(ifs, value);
             list.append(value);
         }
-        cout << "csv loaded\n";
+        cout << fpath << " loaded\n";
         return true;
     }
     else
@@ -71,11 +73,11 @@ void contact_list::run()
             switch (usr_input) {
                 case 0:
                     cout << "quitting application\n"
-                            "writing data to disk as serial.out\n";
+                            "writing data to disk as backup.txt\n";
                     list.print_to_file();
                     break;
                 case 1:
-                    list.print();
+                    list.print_to_screen();
                     break;
                 case 2:
                     cout << "Enter name to find: ";

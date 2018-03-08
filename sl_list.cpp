@@ -10,8 +10,8 @@ using std::string;
 /**
 * Print list; all of it
 */
-void List::print(bool to_file) {
-
+void List::print_to_screen() 
+{
     // Temp pointer
     Node *tmp = head;
 
@@ -22,37 +22,51 @@ void List::print(bool to_file) {
     }
     else
     {
-
-        std::ofstream out("serial.out");
-        if (to_file)
-            out << "backup\n";  // throwaway top line to match csv
         if (tmp->get_next() != NULL)
         {
             while (tmp->get_next() != NULL)
             {
-                if (to_file)
-                    out << tmp->get_data() << endl;
-                else
-                    cout << tmp->get_data() << endl;
+                cout << tmp->get_data() << endl;
                 tmp = tmp->get_next();
             }
         }
         else
         // One node in the list
         {
-            if (to_file)
-                out << tmp->get_data();
-            else
-                cout << tmp->get_data() << endl;
+            cout << tmp->get_data() << endl;
         }
-        out.close();
     }
 }
 
 void List::print_to_file()
 {
-    bool to_file =  true;
-    print(to_file);
+    // Temp pointer
+    Node *tmp = head;
+
+    // No nodes
+    if ( tmp == NULL ) {
+        cout << "EMPTY" << endl;
+        return;
+    }
+    else
+    {
+        std::ofstream out("backup.txt");
+        out << "backup\n";  // throwaway top line to match csv
+        if (tmp->get_next() != NULL)
+        {
+            while (tmp->get_next() != NULL)
+            {
+                out << tmp->get_data() << endl;
+                tmp = tmp->get_next();
+            }
+        }
+        else
+        // One node in the list
+        {
+            out << tmp->get_data();
+        }
+        out.close();
+    }
 }
 
 

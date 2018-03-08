@@ -11,7 +11,7 @@ class List {
         bool find_maybe_delete(string name, bool del) ;
     public:
         List() { head = NULL; };
-        void print(bool to_file = false);
+        void print_to_screen();
         void print_to_file();
         void append(string data);
         bool find(string name);
