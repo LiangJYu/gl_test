@@ -91,7 +91,7 @@ void List::find_maybe_delete(string name, bool del)
         // check if only 1 element has name
         if (tmp->get_next() == NULL && tmp->get_data() == name)
         {
-            cout << report << tmp->get_data();
+            cout << report << tmp->get_data() << endl;
             if (del)
             {
                 delete tmp;
@@ -111,7 +111,7 @@ void List::find_maybe_delete(string name, bool del)
             // check if name match is found
             if (tmp->get_data() == name)
             {
-                cout << report << tmp->get_data();
+                cout << report << tmp->get_data() << endl;
                 if (del) {
                     prev->set_next(tmp->get_next());
                     delete tmp;
@@ -119,4 +119,22 @@ void List::find_maybe_delete(string name, bool del)
             }
         }
     }
+}
+
+/*
+* wrapper around find_maybe_delete for finding something
+*/
+void List::find(string name)
+{
+    bool del = false;
+    find_maybe_delete(name, del);
+}
+
+/*
+* wrapper around find_maybe_delete for deleting something
+*/
+void List::erase(string name)
+{
+    bool del = true;
+    find_maybe_delete(name, del);
 }
