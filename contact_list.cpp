@@ -72,6 +72,7 @@ void contact_list::run()
                 case 0:
                     cout << "quitting application\n"
                             "writing data to disk as serial.out\n";
+                    list.print_to_file();
                     break;
                 case 1:
                     list.print();

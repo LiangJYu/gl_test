@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "sl_list.h"
 
 using std::cout;
@@ -9,7 +10,7 @@ using std::string;
 /**
 * Print list; all of it
 */
-void List::print() {
+void List::print(bool to_file) {
 
     // Temp pointer
     Node *tmp = head;
@@ -22,21 +23,38 @@ void List::print() {
     else
     {
 
+        std::ofstream out("serial.out");
+        if (to_file)
+            out << "backup\n";  // throwaway top line to match csv
         if (tmp->get_next() != NULL)
         {
             while (tmp->get_next() != NULL)
             {
-                cout << tmp->get_data() << endl;
+                if (to_file)
+                    out << tmp->get_data() << endl;
+                else
+                    cout << tmp->get_data() << endl;
                 tmp = tmp->get_next();
             }
         }
         else
         // One node in the list
         {
-            cout << tmp->get_data() << endl;
+            if (to_file)
+                out << tmp->get_data();
+            else
+                cout << tmp->get_data() << endl;
         }
+        out.close();
     }
 }
+
+void List::print_to_file()
+{
+    bool to_file =  true;
+    print(to_file);
+}
+
 
  /**
  * Append a node to the linked list
@@ -86,8 +104,10 @@ bool has_name(Node* n, string name)
 *   string  - name  - who to find to delete or print
 *   bool    - del   - true: delete if name found, else print contact
 */
-void List::find_maybe_delete(string name, bool del) 
+bool List::find_maybe_delete(string name, bool del) 
 {
+    bool found = false;
+
     // Temp pointer
     Node *tmp = head;
 
@@ -104,6 +124,7 @@ void List::find_maybe_delete(string name, bool del)
         //if (tmp->get_next() == NULL && tmp->get_data() == name)
         if (tmp->get_next() == NULL && has_name(tmp, name))
         {
+            found = true;
             cout << report << tmp->get_data() << endl;
             if (del)
             {
@@ -126,6 +147,7 @@ void List::find_maybe_delete(string name, bool del)
             //if (tmp->get_data() == name)
             if (has_name(tmp, name))
             {
+                found = true;
                 cout << report << tmp->get_data() << endl;
                 if (del) {
                     prev->set_next(tmp->get_next());
@@ -134,22 +156,23 @@ void List::find_maybe_delete(string name, bool del)
             }
         }
     }
+    return found;
 }
 
 /*
 * wrapper around find_maybe_delete for finding something
 */
-void List::find(string name)
+bool List::find(string name)
 {
     bool del = false;
-    find_maybe_delete(name, del);
+    return find_maybe_delete(name, del);
 }
 
 /*
 * wrapper around find_maybe_delete for deleting something
 */
-void List::erase(string name)
+bool List::erase(string name)
 {
     bool del = true;
-    find_maybe_delete(name, del);
+    return find_maybe_delete(name, del);
 }
