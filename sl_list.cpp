@@ -164,7 +164,7 @@ bool List::find_maybe_delete(string name, bool del)
                 found = true;
                 cout << report << tmp->data << endl;
                 if (del) {
-                    prev->set_next(tmp->next);
+                    prev->next = tmp->next;
                     delete tmp;
                 }
             }

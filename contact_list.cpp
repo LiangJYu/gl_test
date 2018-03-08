@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 
 #include "contact_list.h"
+#include "quick_sort.h"
 
 using std::cout;
 using std::cin;
@@ -31,6 +32,8 @@ bool contact_list::read_csv_to_list()
             std::getline(ifs, value);
             list.append(value);
         }
+        Node *head = list.get_head();
+        quick_sort(&head);
         cout << fpath << " loaded\n";
         return true;
     }

@@ -11,10 +11,6 @@ using std::string;
 struct Node {
     string data; 
     Node* next;
-
-  public:
-    Node() {};
-    void set_data(string aData) { data = aData; };
-    void set_next(Node* aNext = NULL) { next = aNext; };
+    
 };
 #endif /* NODE_H */

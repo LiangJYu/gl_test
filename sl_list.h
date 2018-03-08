@@ -16,6 +16,7 @@ class List {
         void append(string data);
         bool find(string name);
         bool erase(string name);
+        Node* get_head() { return head; };
 };
 
 #endif /* SL_LIST_H */
